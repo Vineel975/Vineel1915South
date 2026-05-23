@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+:root {
+  --background: #FAF7F2;
+  --foreground: #1F1A14;
+  --cream: #FAF7F2;
+  --cream-2: #FDF8F1;
+  --orange: #E07A3C;
+  --orange-soft: #F4D9C4;
+  --orange-50: #FCEFE3;
+  --charcoal: #1F1A14;
+  --charcoal-soft: #4A4339;
+  --tan: #E8DFD0;
+  --tan-2: #D9CEB8;
+  --olive: #5F7A3D;
+  --olive-soft: #E5EDD7;
+  --amber: #B8771F;
+  --amber-soft: #F5E6CC;
+  --info: #3B6478;
+  --info-soft: #DCE9EF;
+  --red: #B43A2A;
+  --red-soft: #F4D9D3;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-cream: var(--cream);
+  --color-cream2: var(--cream-2);
+  --color-orange: var(--orange);
+  --color-orange-soft: var(--orange-soft);
+  --color-orange-50: var(--orange-50);
+  --color-charcoal: var(--charcoal);
+  --color-charcoal-soft: var(--charcoal-soft);
+  --color-tan: var(--tan);
+  --color-tan-2: var(--tan-2);
+  --color-olive: var(--olive);
+  --color-olive-soft: var(--olive-soft);
+  --color-amber: var(--amber);
+  --color-amber-soft: var(--amber-soft);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+  --color-red: var(--red);
+  --color-red-soft: var(--red-soft);
+}
+
+html,
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family:
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  border-color: var(--tan);
+}
+
+::selection {
+  background: var(--orange-soft);
+  color: var(--charcoal);
+}
+
+/* Subtle scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--tan-2);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
