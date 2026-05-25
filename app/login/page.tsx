@@ -1,10 +1,10 @@
 // app/login/page.tsx
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-export default function LoginPage() {
+function LoginForm() {
   const router = useRouter();
   const params = useSearchParams();
   const from = params.get("from") || "/";
@@ -32,6 +32,52 @@ export default function LoginPage() {
     }
   }
 
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Password"
+        autoFocus
+        style={{
+          width: "100%",
+          padding: "10px 12px",
+          fontSize: "14px",
+          border: "1px solid #E8DFD0",
+          borderRadius: "6px",
+          marginBottom: "12px",
+          boxSizing: "border-box",
+        }}
+      />
+      {error && (
+        <p style={{ color: "#B5483A", fontSize: "12px", marginBottom: "12px" }}>
+          {error}
+        </p>
+      )}
+      <button
+        type="submit"
+        disabled={loading || !password}
+        style={{
+          width: "100%",
+          padding: "10px",
+          fontSize: "14px",
+          fontWeight: 600,
+          color: "white",
+          background: "#E07A3C",
+          border: "none",
+          borderRadius: "6px",
+          cursor: loading ? "not-allowed" : "pointer",
+          opacity: loading || !password ? 0.6 : 1,
+        }}
+      >
+        {loading ? "Checking..." : "Continue"}
+      </button>
+    </form>
+  );
+}
+
+export default function LoginPage() {
   return (
     <div
       style={{
@@ -67,47 +113,9 @@ export default function LoginPage() {
         <p style={{ fontSize: "13px", color: "#5A4F42", marginBottom: "24px" }}>
           Workflow Prototyper — enter password to continue
         </p>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
-            autoFocus
-            style={{
-              width: "100%",
-              padding: "10px 12px",
-              fontSize: "14px",
-              border: "1px solid #E8DFD0",
-              borderRadius: "6px",
-              marginBottom: "12px",
-              boxSizing: "border-box",
-            }}
-          />
-          {error && (
-            <p style={{ color: "#B5483A", fontSize: "12px", marginBottom: "12px" }}>
-              {error}
-            </p>
-          )}
-          <button
-            type="submit"
-            disabled={loading || !password}
-            style={{
-              width: "100%",
-              padding: "10px",
-              fontSize: "14px",
-              fontWeight: 600,
-              color: "white",
-              background: "#E07A3C",
-              border: "none",
-              borderRadius: "6px",
-              cursor: loading ? "not-allowed" : "pointer",
-              opacity: loading || !password ? 0.6 : 1,
-            }}
-          >
-            {loading ? "Checking..." : "Continue"}
-          </button>
-        </form>
+        <Suspense fallback={<div style={{ height: "120px" }} />}>
+          <LoginForm />
+        </Suspense>
       </div>
     </div>
   );
